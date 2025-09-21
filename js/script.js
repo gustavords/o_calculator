@@ -26,7 +26,6 @@ function calculate ( a, b, operation )
     return calculation;
 }
 
-
 let memory = {
     pre: ``,
     curr: ``,
@@ -37,7 +36,6 @@ function displayNumber ()
 {
     const numbers = document.querySelectorAll( `.number` );
     const calc_display = document.querySelector( `.calc_display` );
-
 
     numbers.forEach( ( number ) =>
     {
@@ -51,7 +49,7 @@ function displayNumber ()
                 calc_display.textContent = ``;
             }
             calc_display.textContent += e.target.value;
-            memory.curr = calc_display.textContent;
+            memory.curr = calc_display.textContent; //saves into memory
         } )
     } );
 }
@@ -72,24 +70,17 @@ function processInput ()
     const cal_btns = document.querySelectorAll( `.cal_btn` );
     const calc_display = document.querySelector( `.calc_display` );
 
-
-
     cal_btns.forEach( ( button ) =>
     {
         button.addEventListener( `click`, ( e ) =>
         {
-            //for clear btn
-            if ( e.target.value === `clr` )
-            {
-                clear();
-            }
             //for operators
             if ( e.target.value === `+` || e.target.value === `-` || e.target.value === `*` || e.target.value === `/` )
             {
 
                 //if operator pressed without new values, cancel button press
                 if ( calc_display.textContent !== `` && memory.pre === memory.curr ) return;
-                
+
                 calc_display.textContent = ``;
 
                 if ( memory.pre === `` )//memory not loaded
@@ -105,6 +96,22 @@ function processInput ()
 
                 memory.opr = e.target.value;
             }
+            //for equals button
+            if ( e.target.value === `=` && memory.pre !== `` && memory.curr !== `` && memory.opr !== `` )
+            {
+                calc_display.textContent = calculate( +memory.pre, +memory.curr, memory.opr );
+            }
+            //for clear btn
+            if ( e.target.value === `clr` )
+            {
+                calc_display.textContent = ``;
+            }
+            //for all clear btn
+            if ( e.target.value === `ac` )
+            {
+                clear();
+            }
+
         } );
     } );
 
