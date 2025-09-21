@@ -54,7 +54,6 @@ function displayNumber ()
     } );
 }
 
-
 function clear ()
 {
     const calc_display = document.querySelector( `.calc_display` );
@@ -63,7 +62,6 @@ function clear ()
     memory.curr = ``;
     memory.opr = ``;
 }
-
 
 function processInput ()
 {

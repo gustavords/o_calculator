@@ -1,0 +1,251 @@
+function calculate(a, b, operation) {
+    let arithmetics = {
+        add: () => { return a + b },
+     sub: () => { return a - b },
+        mul: () => { return a * b },
+        div: () => { return a / b },
+    }
+
+    let calculation = ``;
+    switch (operation) {
+        case `+`:
+            calculation = arithmetics.add();
+            break;
+        case `-`:
+            calculation = arithmetics.sub();
+            break;
+        case `*`:
+         calculation = arithmetics.mul();
+            break;
+        case `/`:
+            calculation = arithmetics.div();
+            break;
+    }
+    return calculation;
+}
+
+
+let memory = {
+    pre: ``,
+  curr: ``,
+    opr: ``,
+}
+
+function displayNumber() {
+    const numbers = document.querySelectorAll(`.number`);
+    const calc_display = document.querySelector(`.calc_display`);
+
+
+    numbers.forEach((number) => {
+        number.addEventListener(`click`, (e) => {
+ calc_display.textContent += e.target.value;
+            memory.curr = calc_display.textContent;
+        })
+    });
+}
+
+function clear(){
+    const calc_display = document.querySelector(`.calc_display`);
+    calc_display.textContent = ``;memory. pre = ``;
+    memory.curr = ``;
+    memory.opr = ``;
+}
+
+// function getNumber() {
+//     const calc_display = document.querySelector(`.calc_display`);
+//     let current_num = calc_display.textContent;
+//     return parseInt(current_num);
+// }
+// function setNumber(string) {
+//     const calc_display = document.querySelector(`.calc_display`);
+//     calc_display.textContent = string;
+// }
+
+
+function processInput() {
+    const cal_btns = document.querySelectorAll(`.cal_btn`);
+    const calc_display = document.querySelector(`.calc_display`);
+
+    
+
+    cal_btns.forEach((button) => {
+        button.addEventListener(`click`, (e) => {
+            if(e.target.value === `clr`){
+                clear();
+            }
+            if(e.target.value === `+`||e.target.value === `-`||e.target.value === `*`||e.target.value === `/`){
+                if(memory.pre === ``){
+                memory.pre = memory.curr;
+
+        function fuck(){}    
+
+                }
+                memory.opr = e.target.value;
+                console.log(memory);
+            }
+        });
+    });
+
+}
+
+displayNumber();
+processInput();
+
+// if (calc_display.textContent !== ``) {
+//     if (operands.a === null) {
+//         operands.operator = e.target.value;
+//         operands.a = getNumber();
+//         calc_display.textContent = ``;
+
+//         console.log(operands);
+//     }
+//     else if (operands.a !== null && operands.b === null) {
+//         operands.b = getNumber();
+//         calc_display.textContent = calculate(operands.a, operands.b, operands.operator);
+//         operands.operator = e.target.value;
+//         console.log(operands);
+//     }
+//     else if (operands.a != null && operands.b !== null) {
+//         operands.b = getNumber();
+//         operands.a = calculate(operands.a, operands.b, operands.operator);
+//         calc_display.textContent = calculate(operands.a, operands.b, operands.operator);
+//         console.log(operands);
+//     }
+// }
+
+
+// let operands = {
+//     a: null,
+//     b: null,
+//     c: null,
+//     operator: null,
+// }
+
+// cal_btns.forEach((button) => {
+//     button.addEventListener(`click`, (e) => {
+
+//         if (operands.a === null && calc_display.textContent === ``) {
+//             operands.operator = e.target.value;
+//             operands.a = getNumber();
+//             calc_display.textContent = ``;
+
+//             console.log(operands);
+//         }
+//         else if (operands.a === null && calc_display.textContent !== ``) {
+//             operands.operator = e.target.value;
+//             operands.a = getNumber();
+//             calc_display.textContent = ``;
+
+//             console.log(operands);
+//         }
+//         else if (operands.a !== null && operands.b === null) {
+//             operands.b = getNumber();
+//             calc_display.textContent = calculate(operands.a, operands.b, operands.operator);
+//             operands.c = calculate(operands.a, operands.b, operands.operator);
+//             operands.operator = e.target.value;
+//             console.log(operands);
+//             calc_display.textContent = ``;
+
+//         }
+//         else if (operands.a != null && operands.b !== null) {
+//             operands.c = calculate(operands.a, operands.b, operands.operator);
+//             operands.b = getNumber();
+//             operands.a = calculate(operands.a, operands.b, operands.operator);
+//             calc_display.textContent = calculate(operands.a, operands.b, operands.operator);
+//             console.log(operands);
+//             calc_display.textContent = ``;
+//         }
+//         if (e.target.value === `=`) {
+//             calc_display.textContent = ``;
+//             calc_display.textContent = operands.c;
+//             operands.a = null;
+//             operands.b = null;
+//         }
+
+
+//     });
+// });
+
+
+
+
+//  let operands = {
+//         previous: undefined,
+//         current: undefined,
+//         display: undefined,
+//         operator: undefined,
+//     }
+
+//     cal_btns.forEach((button) => {
+//         button.addEventListener(`click`, (e) => {
+
+
+//             if (operands.current === undefined && operands.previous === undefined) {
+//                 operands.previous = 0;
+//                 operands.current = getNumber();
+//                 operands.operator = e.target.value;
+//                 operands.display = operands.current;
+//                 setNumber(``);
+//                 console.log(operands);
+//             }
+//             else if (operands.current === undefined && operands.previous === undefined && getNumber() !== ``) {
+//                 operands.current = getNumber();
+//                 operands.operator = e.target.value;
+//                 operands.display = operands.current;
+//                 setNumber(``);
+//                 console.log(operands);
+//             }
+//             else if (operands.current !== undefined && operands.previous === undefined) {
+//                 operands.previous = operands.display;
+//                 operands.current = getNumber();
+//                 operands.display = calculate(operands.previous, operands.current, operands.operator);
+//                 setNumber(operands.display);
+//                 console.log(operands);
+//             }
+//             else if (operands.current !== undefined && operands.previous !== undefined) {
+//                 setNumber(``);
+//                 operands.previous = operands.display;
+//                 // operands.current = operands.previous;
+//                 operands.current = getNumber();
+//                 operands.display = calculate(operands.previous, operands.current, operands.operator);
+//                 operands.previous = undefined;
+//                 // operands.current = getNumber();
+
+//                 console.log(operands);
+//             }
+//             else if (operands.current !== undefined && operands.previous === undefined && getNumber() !== ``) {
+//                 operands.current = getNumber();
+//                 operands.operator = e.target.value;
+//                 operands.display = calculate(operands.previous, operands.current, operands.operator);
+//                 console.log(operands);
+
+//             }
+
+//         });
+//     });
+
+
+// let calc = {
+//         a: ``,
+//         b: ``,
+//         operation: ``,
+//     }
+
+//  calc.b = getNumber();
+//             setNumber(``);
+//             // if (calc.a === ``) return;
+            
+//             if (calc.a !== `` && calc.b !== ``) {
+//                 setNumber(calculate(calc.a, calc.b, e.target.value));
+                
+//             }
+
+//             calc.operation = e.target.value;
+//             calc.a = calc.b;
+//             calc.b = ``;
+
+//             console.log(calc);
+//         });
+
+
+//this shit breaks formatting in js, why? i dont know
